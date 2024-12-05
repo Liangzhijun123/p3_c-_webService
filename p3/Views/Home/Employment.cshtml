@@ -1,0 +1,198 @@
+﻿@model p3.Models.EmploymentModel
+@{
+    ViewData["Title"] = "Employment";
+}
+
+<h1 class="text-center mt-4">@ViewData["Title"]</h1>
+
+<div class="container my-5">
+    <!-- Introduction Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2>@Model.introduction.title</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.introduction.content != null && Model.introduction.content.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var content in Model.introduction.content)
+                        {
+                            <li class="list-group-item">
+                                <h5 class="fw-bold">@content.title</h5>
+                                <p class="text-muted">@content.description</p>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No content available.</p>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Degree Statistics Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h2>@Model.degreeStatistics.title</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.degreeStatistics.statistics != null && Model.degreeStatistics.statistics.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var statistic in Model.degreeStatistics.statistics)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@statistic.description</span>
+                                <span class="badge bg-primary">@statistic.value</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No statistics available.</p>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Employers Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h2>@Model.employers.title</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.employers.employerNames != null && Model.employers.employerNames.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var employer in Model.employers.employerNames)
+                        {
+                            <li class="list-group-item">@employer</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No employers listed.</p>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-white">
+                <h2>@Model.careers.title</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.careers.careerNames != null && Model.careers.careerNames.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var career in Model.careers.careerNames)
+                        {
+                            <li class="list-group-item">@career</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No career names available.</p>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Coop Table Section -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h2>@Model.coopTable.title</h2>
+            </div>
+            <div class="card-body employer-scroll">
+                @if (Model.coopTable.coopInformation != null && Model.coopTable.coopInformation.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="min-width: 200px;">Employer</th>
+                                    <th>Degree</th>
+                                    <th>City</th>
+                                    <th>Term</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var info in Model.coopTable.coopInformation)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="employer-scroll">
+                                                @info.employer
+                                            </div>
+                                        </td>
+                                        <td>@info.degree</td>
+                                        <td>@info.city</td>
+                                        <td>@info.term</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">No coop information available.</p>
+                }
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Employment Table Section -->
+    <section>
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h2>@Model.employmentTable.title</h2>
+            </div>
+            <div class="card-body employer-scroll">
+                @if (Model.employmentTable.professionalEmploymentInformation != null && Model.employmentTable.professionalEmploymentInformation.Any())
+                {
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Employer</th>
+                                <th>Degree</th>
+                                <th>City</th>
+                                <th>Title</th>
+                                <th>Start Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var info in Model.employmentTable.professionalEmploymentInformation)
+                            {
+                                <tr>
+                                    <td>@info.employer</td>
+                                    <td>@info.degree</td>
+                                    <td>@info.city</td>
+                                    <td>@info.title</td>
+                                    <td>@info.startDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted">No employment information available.</p>
+                }
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,57 @@
+﻿@model p3.Models.PeopleModel
+@{
+    ViewData["Title"] = Model.pageTitle;
+}
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">@Model.pageTitle</h1>
+    <p class="text-muted text-center">@Model.subTitle</p>
+
+    <!-- Faculty Section -->
+    <h2 class="text-primary mb-4">Faculty</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var faculty in Model.faculty)
+        {
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="@faculty.imagePath" alt="@faculty.name" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;">
+                    <div class="card-body">
+                        <h3 class="card-title text-secondary fs-5">@faculty.name</h3>
+                        <p class="text-muted mb-1">@faculty.title</p>
+                        <p class="mb-1"><strong>Office:</strong> @faculty.office</p>
+                        <p class="mb-1"><strong>Phone:</strong> @faculty.phone</p>
+                        <p class="mb-1"><strong>Email:</strong> <a href="mailto:@faculty.email">@faculty.email</a></p>
+                        @if (faculty.website != "")
+                        {
+                            <p class="mt-2"><a href="@faculty.website" class="btn btn-sm btn-outline-primary" target="_blank">Visit Website</a></p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Staff Section -->
+    <h3 class="text-primary mt-5 mb-4">Staff</h3>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var staff in Model.staff)
+        {
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="@staff.imagePath" alt="@staff.name" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;">
+                    <div class="card-body">
+                        <h3 class="card-title text-secondary fs-5">@staff.name</h3>
+                        <p class="text-muted mb-1">@staff.title</p>
+                        <p class="mb-1"><strong>Office:</strong> @staff.office</p>
+                        <p class="mb-1"><strong>Phone:</strong> @staff.phone</p>
+                        <p class="mb-1"><strong>Email:</strong> <a href="mailto:@staff.email">@staff.email</a></p>
+                        @if (staff.website != "")
+                        {
+                            <p class="mt-2"><a href="@staff.website" class="btn btn-sm btn-outline-primary" target="_blank">Visit Website</a></p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

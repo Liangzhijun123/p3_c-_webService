@@ -1,0 +1,22 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<h1>@Model.About.title</h1>
+<section class="about">
+    <p>@Model.About.description</p>
+    <p>@Model.About.quote</p>
+    <p>--- @Model.About.quoteAuthor ---</p>
+</section>
+
+<h1>Second model - course</h1>
+@foreach (var course in Model.Course)
+{
+    <section class="about">
+        <p>@course.courseID</p>
+        <p>@course.title</p>
+        <p>@course.description</p>
+    </section>
+}

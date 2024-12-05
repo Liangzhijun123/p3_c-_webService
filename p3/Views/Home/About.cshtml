@@ -1,0 +1,12 @@
+﻿@model p3.Models.AboutModel;
+@{
+	ViewData["Title"] = Model.pageTitle;
+
+}
+
+<h1>@Model.title</h1>
+<section class="about">
+	<p>@Model.description</p>
+	<p>@Model.quote</p>
+	<p>-- @Model.quoteAuthor --</p>
+</section>
