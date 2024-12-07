@@ -4,6 +4,7 @@ using p3.Models;
 using p3.Services;
 using Newtonsoft.Json;
 using System.Dynamic;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace p3.Controllers
 {
@@ -37,7 +38,39 @@ namespace p3.Controllers
             return View(jsonResult);
         }
 
-		public async Task<IActionResult> Course()
+        //right click on About() to add a view
+        //public IActionResult about()
+        public async Task<IActionResult> About()
+        {
+            DataRetrieval dataR = new DataRetrieval();
+
+            var loadedAbout = await dataR.GetData("about/");
+            var rtnResult = JsonConvert.DeserializeObject<AboutModel>(loadedAbout);
+
+            var loadedResearch = await dataR.GetData("research/");
+            var researchResult = JsonConvert.DeserializeObject<ResearchModel>(loadedResearch);
+
+            var loadedResource = await dataR.GetData("resources/");
+            var resourceResult = JsonConvert.DeserializeObject<ResourceModel>(loadedResource);
+
+            var loadedNews = await dataR.GetData("news/");
+            var newsResult = JsonConvert.DeserializeObject<NewsModel>(loadedNews);
+
+            dynamic expando = new ExpandoObject();
+
+            var comboModel = expando as IDictionary<string, object>;
+
+            comboModel.Add("About", rtnResult);
+            comboModel.Add("Research", researchResult);
+            comboModel.Add("Resources", resourceResult);
+            comboModel.Add("News", newsResult);
+
+            return View(comboModel);
+
+ 
+        }
+
+        public async Task<IActionResult> Course()
 		{
 			// Load the data
 			DataRetrieval dataR = new DataRetrieval();
@@ -90,24 +123,7 @@ namespace p3.Controllers
 
             return View(rtnResult);
         }
-   
-		//right click on About() to add a view
-		//public IActionResult about()
-		public async Task<IActionResult> About()
-        {
-            //let see if the DataRetrieval.cs is retriveable?
-            DataRetrieval dr = new DataRetrieval();
-            var stringAbout = await dr.GetData("about/");
-            
-            //now what?
-                //u do casat to json (string currently)
-                //create a model
-                //put the json into the model
-            var aboutModel = JsonConvert.DeserializeObject<AboutModel>(stringAbout);
-            aboutModel.pageTitle = "About the iSchool";
-            //feed the model to the view
-            return View(aboutModel);
-        }
+  
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

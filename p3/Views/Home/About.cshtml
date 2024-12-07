@@ -1,12 +1,151 @@
-﻿@model p3.Models.AboutModel;
-@{
-	ViewData["Title"] = Model.pageTitle;
+﻿@model dynamic
 
+@{
+    ViewData["Title"] = "About";
 }
 
-<h1>@Model.title</h1>
-<section class="about">
-	<p>@Model.description</p>
-	<p>@Model.quote</p>
-	<p>-- @Model.quoteAuthor --</p>
-</section>
+<div class="container my-5">
+
+    <!-- About Section -->
+    <h1 class="text-center mb-4">About Us</h1>
+    <div>
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2>@Model.About.title</h2>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">@Model.About.description</p>
+                <blockquote class="blockquote">
+                    <p class="mb-0">@Model.About.quote --- @Model.About.quoteAuthor</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion">
+
+        <!-- News Section -->
+        <h3>News</h3>
+        <div>
+            <h2 class="text-center">Latest News</h2>
+            @if (Model.News.older != null && Model.News.older.Count > 0)
+            {
+                <div class="row">
+                    @foreach (var news in Model.News.older)
+                    {
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-secondary text-white">
+                                    <h5>@news.title</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-muted">@news.description</p>
+                                    <small><em>@news.date</em></small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No news available at the moment.</p>
+            }
+        </div>
+
+        <!-- Resources Section -->
+        <h3>Resources</h3>
+        <div>
+            <h2 class="text-center">Resources</h2>
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h3>@Model.Resources.title</h3>
+                    <p>@Model.Resources.subTitle</p>
+                </div>
+                <div class="card-body">
+                    @if (Model.Resources.forms != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Undergraduate Forms</h4>
+                                <ul>
+                                    @foreach (var form in Model.Resources.forms.undergraduateForms)
+                                    {
+                                        <li><a href="@form.href" class="text-primary">@form.formName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Graduate Forms</h4>
+                                <ul>
+                                    @foreach (var form in Model.Resources.forms.graduateForms)
+                                    {
+                                        <li><a href="@form.href" class="text-primary">@form.formName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No resources available at the moment.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Research Section -->
+        <h3>Research</h3>
+        <div>
+            <h2 class="text-center">Research</h2>
+            @if (Model.Research.byInterestArea != null)
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-warning text-dark">
+                        <h3>By Interest Area</h3>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var area in Model.Research.byInterestArea)
+                        {
+                            <div class="mb-3">
+                                <h4>@area.areaName</h4>
+                                <ul>
+                                    @foreach (var citation in area.citations)
+                                    {
+                                        <li>@citation</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (Model.Research.byFaculty != null)
+            {
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h3>By Faculty</h3>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var faculty in Model.Research.byFaculty)
+                        {
+                            <div class="mb-3">
+                                <h4>@faculty.facultyName</h4>
+                                <p><strong>Username:</strong> @faculty.username</p>
+                                <ul>
+                                    @foreach (var citation in faculty.citations)
+                                    {
+                                        <li>@citation</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
