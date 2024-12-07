@@ -4,19 +4,29 @@
     ViewData["Title"] = Model.PageTitle;
 }
 
-<h1>@Model.About.title</h1>
-<section class="about">
-    <p>@Model.About.description</p>
-    <p>@Model.About.quote</p>
-    <p>--- @Model.About.quoteAuthor ---</p>
-</section>
+<div class="container my-5">
+  
+    
 
-<h1>Second model - course</h1>
-@foreach (var course in Model.Course)
-{
-    <section class="about">
-        <p>@course.courseID</p>
-        <p>@course.title</p>
-        <p>@course.description</p>
+    <!-- Course Section -->
+    <section class="mb-5">
+        <h1 class="text-center mb-4">Our Course</h1>
+        <div class="row">
+            @foreach (var course in Model.Course)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5>@course.title</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Course ID:</strong> @course.courseID</p>
+                            <p><strong>Description:</strong> @course.description</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </section>
-}
+</div>

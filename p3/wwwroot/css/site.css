@@ -43,15 +43,20 @@ h1 {
     color: #0056b3;
 }
 
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .card {
     border-radius: 10px;
     overflow: hidden;
     border: none;
 }
-
-.card:hover {
-        transform: scale(1.05);
- }
 
 .card-title {
     font-weight: bold;
@@ -124,4 +129,48 @@ h1 {
 
 .list-group-item:not(:last-child) {
         border-bottom: 1px solid #ddd;
+}
+
+/* List of courses */
+.course-list {
+    margin-top: 15px;
+    padding-left: 20px;
+    display: none;
+}
+
+.course-list .list-group-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.course-list .list-group-item:hover {
+    background-color: #f1f1f1;
+}
+
+.tabs {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+
+
+.tabs ul li {
+    flex: 1;
+    text-align: center;
+}
+
+.tab-content {
+    display: none;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.tab-content.active {
+display: block;
 }

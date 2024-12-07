@@ -1,53 +1,29 @@
 ﻿@model p3.Models.MinorModel
-@{
-    ViewData["Title"] = "Minors";
-}
 
 <h1 class="text-center mt-4">@ViewData["Title"]</h1>
 
 <div class="container my-5">
+
+    <h1 class="text-center mb-4">Minors</h1>
     @if (Model.UgMinors != null && Model.UgMinors.Any())
     {
-        @foreach (var program in Model.UgMinors)
-        {
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h2>@program.name</h2>
+        <div class="accordion" id="minorAccordion">
+            @foreach (var program in Model.UgMinors)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-@program.name">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@program.name" aria-expanded="false" aria-controls="collapse-@program.name">
+                            @program.name
+                        </button>
+                    </h2>
+                    <div id="collapse-@program.name" class="accordion-collapse collapse" aria-labelledby="heading-@program.name" data-bs-parent="#minorAccordion">
+                        <div class="accordion-body">
+                            @await Html.PartialAsync("MinorDetails", program)
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h4 class="card-title text-secondary">@program.title</h4>
-                    <p class="card-text">@program.description</p>
-
-                    @if (program.courses != null && program.courses.Any())
-                    {
-                        <div>
-                            <h5 class="text-muted">Courses:</h5>
-                            <ul class="list-group list-group-flush">
-                                @foreach (var course in program.courses)
-                                {
-                                    <li class="list-group-item">@course</li>
-                                }
-                            </ul>
-                        </div>
-                    }
-
-                    @if (program.note != null)
-                    {
-                        <div class="mt-3">
-                            <strong>Note:</strong>
-                            <p class="text-warning">@program.note</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="mt-3">
-                            <strong>Note:</strong>
-                            <p class="text-muted">No notes available.</p>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
+            }
+        </div>
     }
     else
     {

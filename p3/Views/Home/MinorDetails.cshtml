@@ -1,0 +1,25 @@
+﻿@model p3.Models.UgMinor
+
+<h4 class="text-secondary">@Model.title</h4>
+<p>@Model.description</p>
+
+@if (Model.courses != null && Model.courses.Any())
+{
+    <h5 class="text-muted">Courses:</h5>
+    <ul class="list-group list-group-flush">
+        @foreach (var course in Model.courses)
+        {
+            <li class="list-group-item">
+               
+                <a href="@Url.Action("CourseDetails", "Courses", new { id = course })" class="text-decoration-none">@course</a>
+            </li>
+        }
+    </ul>
+}
+
+<div class="mt-3">
+    <strong>Note:</strong>
+    <p class="@(Model.note != null ? "text-warning" : "text-muted")">
+        @(Model.note ?? "No notes available.")
+    </p>
+</div>

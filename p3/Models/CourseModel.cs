@@ -1,7 +1,5 @@
 ﻿namespace p3.Models
 {
-
-
 	public class CourseModel
 	{
 		public string courseID { get; set; }

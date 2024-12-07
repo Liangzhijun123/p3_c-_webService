@@ -1,4 +1,4 @@
-﻿namespace p3.Models
+﻿namespace p3.Models 
 {
 	public class AboutModel
 	{
