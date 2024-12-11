@@ -19,8 +19,38 @@ namespace p3.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var footerModel = new FooterModel
+            {
+                Social = new SocialModel
+                {
+                    Title = "Follow Us",
+                    Tweet = "Join us on Twitter!",
+                    By = "By RIT",
+                    Twitter = "https://twitter.com/RIT",
+                    Facebook = "https://facebook.com/RIT"
+                },
+                QuickLinks = new List<QuickLinkModel>
+                {
+                    new QuickLinkModel { Title = "Home", Href = "/" },
+                    new QuickLinkModel { Title = "About", Href = "/about" },
+                    new QuickLinkModel { Title = "Courses", Href = "/course" },
+                    new QuickLinkModel { Title = "Employment", Href = "/Employment" },
+                    new QuickLinkModel { Title = "Research", Href = "/research" },
+                    new QuickLinkModel { Title = "Resources", Href = "/resources" },
+                    new QuickLinkModel { Title = "News", Href = "/news" },
+                    new QuickLinkModel { Title = "Degrees", Href = "/degrees" },
+                    new QuickLinkModel { Title = "Minors", Href = "/minors" },
+                },
+                Copyright = new CopyrightModel
+                {
+                    Title = "RIT Course Portal",
+                    Html = "&copy; 2024 All Rights Reserved"
+                }
+            };
+
+            return View(footerModel);
         }
+
 
         public IActionResult Privacy()
         {
@@ -44,6 +74,7 @@ namespace p3.Controllers
         {
             DataRetrieval dataR = new DataRetrieval();
 
+            // Fetch data for different sections
             var loadedAbout = await dataR.GetData("about/");
             var rtnResult = JsonConvert.DeserializeObject<AboutModel>(loadedAbout);
 
@@ -56,19 +87,51 @@ namespace p3.Controllers
             var loadedNews = await dataR.GetData("news/");
             var newsResult = JsonConvert.DeserializeObject<NewsModel>(loadedNews);
 
-            dynamic expando = new ExpandoObject();
+            // Footer model setup
+            var footerModel = new FooterModel
+            {
+                Social = new SocialModel
+                {
+                    Title = "Follow Us",
+                    Tweet = "Join us on Twitter!",
+                    By = "By RIT",
+                    Twitter = "https://twitter.com/RIT",
+                    Facebook = "https://facebook.com/RIT"
+                },
+                QuickLinks = new List<QuickLinkModel>
+        {
+            new QuickLinkModel { Title = "Home", Href = "/" },
+            new QuickLinkModel { Title = "About", Href = "/about" },
+            new QuickLinkModel { Title = "Courses", Href = "/course" },
+            new QuickLinkModel { Title = "Employment", Href = "/Employment" },
+            new QuickLinkModel { Title = "Research", Href = "/research" },
+            new QuickLinkModel { Title = "Resources", Href = "/resources" },
+            new QuickLinkModel { Title = "News", Href = "/news" },
+            new QuickLinkModel { Title = "Degrees", Href = "/degrees" },
+            new QuickLinkModel { Title = "Minors", Href = "/minors" },
+        },
+                Copyright = new CopyrightModel
+                {
+                    Title = "RIT Course Portal",
+                    Html = "&copy; 2024 All Rights Reserved"
+                }
+            };
 
+            // Creating a dynamic object (ExpandoObject)
+            dynamic expando = new ExpandoObject();
             var comboModel = expando as IDictionary<string, object>;
 
+            // Adding the models to the dynamic object
             comboModel.Add("About", rtnResult);
             comboModel.Add("Research", researchResult);
             comboModel.Add("Resources", resourceResult);
             comboModel.Add("News", newsResult);
+            comboModel.Add("Footer", footerModel);
 
+            // Return the view with the dynamic model
             return View(comboModel);
-
- 
         }
+
 
         public async Task<IActionResult> Course()
 		{
