@@ -174,3 +174,38 @@ a:hover {
 .tab-content.active {
 display: block;
 }
+
+
+.link-hover {
+    position: relative;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.link-hover:hover {
+    color: #fff;
+    background-color: #0056b3; 
+    transform: translateY(-3px);
+}
+
+
+.fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}

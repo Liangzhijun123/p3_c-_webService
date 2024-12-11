@@ -1,8 +1,108 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-} 
+    ViewData["Title"] = "Welcome to RIT";
+}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@model p3.Models.FooterModel
+
+<div class="container text-center my-5">
+    <!-- Splash Screen Header -->
+    <h1 class="display-4 text-primary mb-4">Welcome to RIT Portal</h1>
+    <p class="lead mb-5">Explore the various minor courses, degrees, staff, and the interactive RIT map below!</p>
+
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+        <!-- Minor Courses Section -->
+        <div class="col d-flex">
+            <div class="card shadow-lg mb-4 section fade-in w-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title text-success"><i class="fas fa-book-open"></i> Explore RIT's Minor Courses</h3>
+                    <p class="card-text">Discover the different minors offered at RIT, tailored to help you enhance your skills and broaden your academic horizon.</p>
+                    <a class="btn btn-success btn-lg link-hover mt-auto" asp-controller="Home" asp-action="Minor">View Minor Courses</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Courses Section -->
+        <div class="col d-flex">
+            <div class="card shadow-lg mb-4 section fade-in w-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title text-info"><i class="fas fa-info-circle"></i> About RIT's Courses</h3>
+                    <p class="card-text">Learn about the variety of courses available at RIT, designed to challenge and inspire students from all disciplines.</p>
+                    <a class="btn btn-info btn-lg link-hover mt-auto" asp-controller="Home" asp-action="About">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Section -->
+        <div class="col d-flex">
+            <div class="card shadow-lg mb-4 section fade-in w-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title text-success"><i class="fas fa-list-ul"></i> Browse Available Courses</h3>
+                    <p class="card-text">Browse through the list of available courses and find the ones that interest you the most.</p>
+                    <a class="btn btn-success btn-lg link-hover mt-auto" asp-controller="Home" asp-action="Course">View All Courses</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Section -->
+        <div class="col d-flex">
+            <div class="card shadow-lg mb-4 section fade-in w-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title text-warning"><i class="fas fa-users"></i> Meet Our Faculty</h3>
+                    <p class="card-text">Get to know the professors and staff members who are dedicated to providing the best education at RIT.</p>
+                    <a class="btn btn-warning btn-lg link-hover mt-auto" asp-controller="Home" asp-action="People">Meet the Staff</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Degree Programs Section -->
+        <div class="col d-flex">
+            <div class="card shadow-lg mb-4 section fade-in w-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title text-dark"><i class="fas fa-graduation-cap"></i> Explore RIT Degree Programs</h3>
+                    <p class="card-text">Explore RIT's undergraduate and graduate degree programs that are designed to prepare you for success in your chosen career.</p>
+                    <a class="btn btn-dark btn-lg link-hover mt-auto" asp-controller="Home" asp-action="Degree">View Degree Programs</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employment Programs Section -->
+        <div class="col d-flex">
+            <div class="card shadow-lg mb-4 section fade-in w-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title text-dark"><i class="fas fa-graduation-cap"></i> Explore RIT Employments</h3>
+                    <p class="card-text">Explore RIT's Employments in campus</p>
+                    <a class="btn btn-dark btn-lg link-hover mt-auto" asp-controller="Home" asp-action="Employment">View Employment Programs</a>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+    <!-- Footer Section -->
+    <footer class="mt-5 py-4 bg-light">
+        <!-- Social Media Links -->
+        <div class="container text-center">
+            <h5>@Model.Social.Title</h5>
+            <p>@Model.Social.Tweet <a href="@Model.Social.Twitter" target="_blank" class="text-primary">@Model.Social.By</a> | <a href="@Model.Social.Facebook" target="_blank" class="text-primary">Facebook</a></p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="container text-center my-4">
+            <h5>Quick Links</h5>
+            <ul class="list-inline">
+                @foreach (var link in Model.QuickLinks)
+                {
+                    <li class="list-inline-item">
+                        <a href="@link.Href" class="text-dark">@link.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="container text-center">
+            <p class="mb-0">@Html.Raw(Model.Copyright.Html)</p>
+        </div>
+    </footer>
 </div>
